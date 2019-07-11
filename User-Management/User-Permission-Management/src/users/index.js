@@ -109,9 +109,9 @@ export const ValidateUsers = async (request, h) => {
     var result = await Users.find(request.payload);
     // res.status(200).send({ auth: true, token: token });
     // var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
-    console.log("Length", result.length, "----", request.payload.name);
+    console.log("Length", result.length, "----", request.payload.user_name);
     if (result.length > 0) {
-      var token = jwt.sign({ id: request.payload.name }, process.env.secret, {
+      var token = jwt.sign({ id: request.payload.user_name }, process.env.secret, {
         expiresIn: 100 // expires in 24 hours
       });
       return h.response({ Message: "Success", token: token }).code(200);
