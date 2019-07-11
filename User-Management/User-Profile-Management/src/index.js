@@ -1,8 +1,7 @@
 import "dotenv/config";
 import Hapi from "hapi";
 import mongoose from "mongoose";
-import { CreateUsers, AllUsers, UpdateUsersById, DeleteUsersById, ValidateUsers, ForgetPassword, ValidateUserExists } from '../src/users/index';
-import {CreateUserGroup, AddGroupUsers} from '../src/user-group/index'
+import { CreateUsers, AllUsers, UpdateUsersById, DeleteUsersById, ValidateUsers, ForgetPassword, ValidateUserExists, ChangePassword } from '../src/users/index';
 
 //mongodb://surendraraj3:a123456789@ds161764.mlab.com:61764/inteluscan
 //mongodb://surendraraj3:a123456789@ds111993.mlab.com:11993/yoofoo-web
@@ -17,7 +16,7 @@ const init = async () => {
 };
 
 const server = Hapi.server({
-  port: process.env.PORT || 8000,
+  port: process.env.PORT || 7002,
   host: process.env.IP || '0.0.0.0',
   routes: {
     cors: {
@@ -73,19 +72,12 @@ server.route({
   handler:ValidateUserExists
 })
 
-//----------------Create user group starts-------------------
+//Change password based on userid
 server.route({
-  method:'POST',
-  path:'/user-group/create-user-group',
-  handler:CreateUserGroup
+  method: 'GET',
+  path:'/user/change-password/{user_name}',
+  handler:ChangePassword
 })
-
-server.route({
-  method:'POST',
-  path:'/user-group/create-add-user-group/{group_id}',
-  handler:AddGroupUsers
-})
-//----------------Create user group ends--------------
 
 process.on("unhandledRejection", err => {
   console.log(err);

@@ -162,3 +162,16 @@ export const ForgetPassword = async (request, h) => {
     return h.response(error).code(500);
   }
 } 
+
+//Change password for an user
+export const ChangePassword = async (request, h) => {
+  try {
+    // const reqChngPassPayload = new Users(request.payload);
+    const reqChngPassPayload = await Users.find({"user_name": request.params.user_name});
+    console.log(reqChngPassPayload, 'Change Password')
+    // const savePayload = await reqChngPassPayload.save();
+    return h.response("Test")
+  } catch (error) {
+    return h.response(error).code(500);
+  }
+}
