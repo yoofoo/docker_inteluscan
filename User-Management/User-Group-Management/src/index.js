@@ -6,7 +6,7 @@ import {CreateUserGroup, AddGroupUsers} from '../src/user-group/index'
 //mongodb://surendraraj3:a123456789@ds161764.mlab.com:61764/inteluscan
 //mongodb://surendraraj3:a123456789@ds111993.mlab.com:11993/yoofoo-web
 mongoose
-  .connect("mongodb://127.0.0.1:27017/inteluscan_db", { useNewUrlParser: true } )
+  .connect("mongodb://mongo:27017/dockin", { useNewUrlParser: true } )
   .then(() => console.log("MongoDB connected..."))
   .catch(err => console.error(err));
 
@@ -29,6 +29,13 @@ const server = Hapi.server({
 
 //----------------Create user group starts-------------------
 server.route({
+  method:'GET',
+  path:'/',
+  handler: function (request, reply) {
+    return reply.response('Hello, world!');
+    }
+})
+server.route({
   method:'POST',
   path:'/user-group/create-user-group',
   handler:CreateUserGroup
@@ -39,6 +46,7 @@ server.route({
   path:'/user-group/create-add-user-group/{group_id}',
   handler:AddGroupUsers
 })
+
 //----------------Create user group ends--------------
 
 process.on("unhandledRejection", err => {

@@ -112,7 +112,7 @@ export const ValidateUsers = async (request, h) => {
     console.log("Length", result.length, "----", request.payload.user_name);
     if (result.length > 0) {
       var token = jwt.sign({ id: request.payload.user_name }, process.env.secret, {
-        expiresIn: 100 // expires in 24 hours
+        expiresIn: 1000 // expires in 24 hours
       });
       return h.response({ Message: "Success", token: token }).code(200);
     } else return h.response({ Message: "Invalid login details" });

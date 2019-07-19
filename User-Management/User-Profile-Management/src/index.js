@@ -7,7 +7,7 @@ import { AddNewProfile, ListOfUsers, UserPersonalInfoById } from "../src/users/i
 //mongodb://surendraraj3:a123456789@ds161764.mlab.com:61764/inteluscan
 //mongodb://surendraraj3:a123456789@ds111993.mlab.com:11993/yoofoo-web
 mongoose
-  .connect("mongodb://127.0.0.1:27017/inteluscan_db", { useNewUrlParser: true })
+  .connect("mongodb://mongo:27017/dockin", { useNewUrlParser: true })
   .then(() => console.log("MongoDB connected..."))
   .catch(err => console.error(err));
 
